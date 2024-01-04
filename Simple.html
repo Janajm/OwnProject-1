@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple Notepad</title>
+</head>
+<body>
+    <h1>Simple Notepad</h1>
+    <textarea id="content" rows="20" cols="80"></textarea><br>
+    <button onclick="saveContent()">Save</button>
+    <script>
+        function saveContent() {
+            var content = document.getElementById('content').value;
+            fetch('/save', {
+                method: 'POST',
+                body: content
+            }).then(response => {
+                if(response.ok) {
+                    alert('Content saved successfully');
+                } else {
+                    alert('Error saving content');
+                }
+            }).catch(error => {
+                alert('Error: ' + error);
+            });
+        }
+    </script>
+</body>
+</html>
